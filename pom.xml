@@ -8,7 +8,7 @@
   <description>qooxdoo-sdk is used to create a JAR of the qooxdoo SDK and provide it at Maven Central.</description>
 
   <url>http://qooxdoo.org</url>
-  <inceptionYear>2011</inceptionYear>
+  <inceptionYear>2005</inceptionYear>
 
   <parent>
     <groupId>org.qooxdoo</groupId>
@@ -16,9 +16,22 @@
     <version>1.4</version>
   </parent>
 
+  <licenses>
+    <license>
+      <name>LGPL</name>
+      <url>http://www.gnu.org/licenses/lgpl.html</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>EPL</name>
+      <url>http://www.eclipse.org/org/documents/epl-v10.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <issueManagement>
-    <system />
-    <url>https://</url>
+    <system>Bugzilla</system>
+    <url>http://bugzilla.qooxdoo.org/</url>
   </issueManagement>
 
   <scm>

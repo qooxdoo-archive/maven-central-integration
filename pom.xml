@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.qooxdoo</groupId>
+  <artifactId>qooxdoo-sdk</artifactId>
+  <version>1.4-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>qooxdoo SDK maven integration</name>
+  <description>qooxdoo-sdk is used to create a JAR of the qooxdoo SDK and provide it at Maven Central.</description>
+
+  <url>http://qooxdoo.org</url>
+  <inceptionYear>2011</inceptionYear>
+
+  <parent>
+    <groupId>org.qooxdoo</groupId>
+    <artifactId>qooxdoo-maven-parent</artifactId>
+    <version>1.4</version>
+  </parent>
+
+  <issueManagement>
+    <system />
+    <url>https://</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git://github.com/qooxdoo/qooxdoo.git</connection>
+    <developerConnection>scm:git:git@github.com:qooxdoo/qooxdoo.git</developerConnection>
+    <url>https://github.com/qooxdoo/qooxdoo</url>
+  </scm>
+
+</project>

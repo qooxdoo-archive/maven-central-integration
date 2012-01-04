@@ -29,6 +29,34 @@
     </license>
   </licenses>
 
+  <organization>
+    <name>1&amp;1 Internet AG</name>
+    <url>http://1and1.org</url>
+  </organization>
+  
+  <developers>
+    <developer>
+      <name>Alexander Steitz</name>
+      <email>alexander.steitz at 1und1.de</email>
+      <organization>1&amp;1 Internet AG</organization>
+      <organizationUrl>http://qooxdoo.org</organizationUrl>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+    <developer>
+      <name>Daniel Wagner</name>
+      <email>daniel.wagner at 1und1.de</email>
+      <organization>1&amp;1 Internet AG</organization>
+      <organizationUrl>http://qooxdoo.org</organizationUrl>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <timezone>+2</timezone>
+    </developer>
+  </developers>
+
   <issueManagement>
     <system>Bugzilla</system>
     <url>http://bugzilla.qooxdoo.org/</url>

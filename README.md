@@ -21,6 +21,8 @@ folder as
 
     qooxdoo-sdk
 
+subdirectory.
+
 
 ## Usage
 

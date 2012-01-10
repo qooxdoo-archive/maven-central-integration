@@ -1,0 +1,3 @@
+src/main/resources/qooxdoo-sdk
+*.asc
+target

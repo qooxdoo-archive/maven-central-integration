@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>test</groupId>
+  <artifactId>simple</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  <name>simple</name>
+  <description>Application description</description>
+  
+ 	<build>
+		<outputDirectory>target/it-target</outputDirectory>
+		<testOutputDirectory>target/test-it</testOutputDirectory>
+			
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.2</version>
+						<executions>
+							<!--Import qooxdoo sdk and add it to target directory -->
+							<execution>
+								<id>extract-qooxdoo-sdk</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>unpack-dependencies</goal>
+								</goals>
+								<configuration>
+									<includeArtifactIds>qooxdoo-sdk</includeArtifactIds>
+									<outputDirectory>target/it-target</outputDirectory>
+									<excludes>META-INF,.gitignore</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			
+		
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.qooxdoo</groupId>
+			<artifactId>qooxdoo-sdk</artifactId>
+			<version>@pom.version@</version>
+		</dependency>
+	</dependencies>
+  
+</project>

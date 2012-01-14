@@ -1,71 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.qooxdoo</groupId>
-  <artifactId>qooxdoo-sdk</artifactId>
-  <version>1.5</version>
-  <name>qooxdoo SDK maven integration</name>
-  <description>qooxdoo-sdk is used to create a JAR of the qooxdoo SDK and provide it at Maven Central.</description>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.qooxdoo</groupId>
+	<artifactId>qooxdoo-sdk</artifactId>
+	<version>1.6</version>
+	<name>qooxdoo SDK maven integration</name>
+	<description>qooxdoo-sdk is used to create a JAR of the qooxdoo SDK and provide it at Maven Central.</description>
 
-  <url>http://qooxdoo.org</url>
-  <inceptionYear>2005</inceptionYear>
+	<url>http://qooxdoo.org</url>
+	<inceptionYear>2005</inceptionYear>
 
-  <parent>
-    <groupId>org.qooxdoo</groupId>
-    <artifactId>qooxdoo-maven-parent</artifactId>
-    <version>1.4</version>
-  </parent>
-  
-  <licenses>
-    <license>
-      <name>LGPL</name>
-      <url>http://www.gnu.org/licenses/lgpl.html</url>
-      <distribution>repo</distribution>
-    </license>
-    <license>
-      <name>EPL</name>
-      <url>http://www.eclipse.org/org/documents/epl-v10.php</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+	<parent>
+		<groupId>org.qooxdoo</groupId>
+		<artifactId>qooxdoo-maven-parent</artifactId>
+		<version>1.6</version>
+	</parent>
 
-  <organization>
-    <name>1&amp;1 Internet AG</name>
-    <url>http://1and1.org</url>
-  </organization>
-  
-  <developers>
-    <developer>
-      <name>Alexander Steitz</name>
-      <email>maven at qooxdoo.org</email>
-      <organization>1&amp;1 Internet AG</organization>
-      <organizationUrl>http://qooxdoo.org</organizationUrl>
-      <roles>
-        <role>Developer</role>
-      </roles>
-      <timezone>+2</timezone>
-    </developer>
-    <developer>
-      <name>Daniel Wagner</name>
-      <email>maven at qooxdoo.org</email>
-      <organization>1&amp;1 Internet AG</organization>
-      <organizationUrl>http://qooxdoo.org</organizationUrl>
-      <roles>
-        <role>Developer</role>
-      </roles>
-      <timezone>+2</timezone>
-    </developer>
-  </developers>
+	<licenses>
+		<license>
+			<name>LGPL</name>
+			<url>http://www.gnu.org/licenses/lgpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+		<license>
+			<name>EPL</name>
+			<url>http://www.eclipse.org/org/documents/epl-v10.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-  <issueManagement>
-    <system>Bugzilla</system>
-    <url>http://bugzilla.qooxdoo.org/</url>
-  </issueManagement>
+	<organization>
+		<name>1&amp;1 Internet AG</name>
+		<url>http://1and1.org</url>
+	</organization>
 
-  <scm>
-    <connection>scm:git:git://github.com/qooxdoo/qooxdoo.git</connection>
-    <developerConnection>scm:git:git@github.com:qooxdoo/qooxdoo.git</developerConnection>
-    <url>https://github.com/qooxdoo/qooxdoo</url>
-  </scm>
+	<developers>
+		<developer>
+			<name>Alexander Steitz</name>
+			<email>maven at qooxdoo.org</email>
+			<organization>1&amp;1 Internet AG</organization>
+			<organizationUrl>http://qooxdoo.org</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+2</timezone>
+		</developer>
+		<developer>
+			<name>Daniel Wagner</name>
+			<email>maven at qooxdoo.org</email>
+			<organization>1&amp;1 Internet AG</organization>
+			<organizationUrl>http://qooxdoo.org</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+2</timezone>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>http://bugzilla.qooxdoo.org/</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:git:git://github.com/qooxdoo/qooxdoo.git</connection>
+		<developerConnection>scm:git:git@github.com:qooxdoo/qooxdoo.git</developerConnection>
+		<url>https://github.com/qooxdoo/qooxdoo</url>
+	</scm>
+
+	<properties>
+		<env.SDKVERSION>${project.version}</env.SDKVERSION>
+	</properties>
+
+	<profiles>
+		<!-- Download the sdk from the scm -->
+		<profile>
+			<id>get-sdk-from-scm</id>
+			<activation>
+				<file>
+					<missing>target/classes/qooxdoo-sdk/version.txt</missing>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Compute the git tag name from the project version number -->
+					<plugin>
+						<groupId>org.codehaus.groovy.maven</groupId>
+						<artifactId>gmaven-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<id>qx.compute.tagname</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<properties>
+										<qooxdoo.sdk.version>${project.version}</qooxdoo.sdk.version>
+									</properties>
+									<source>
+										project.properties['qooxdoo.sdk.tagname'] =
+										"release_"+((project.properties['qooxdoo.sdk.version'] =~
+										/\./).replaceAll('_'));
+            				</source>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>echo-info</id>
+								<phase>initialize</phase>
+								<configuration>
+									<tasks>
+										<echo>Release tag name: ${qooxdoo.sdk.tagname}</echo>
+										<echo>To force a new sdk download, run 'mvn clean'</echo>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Checkout the qooxdoo-sdk from scm -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>get-qooxdoo-sdk</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>checkout</goal>
+								</goals>
+								<configuration>
+									<scmVersion>${qooxdoo.sdk.tagname}</scmVersion>
+									<scmVersionType>tag</scmVersionType>
+									<checkoutDirectory>target/classes/qooxdoo-sdk</checkoutDirectory>
+									<skipCheckoutIfExists>false</skipCheckoutIfExists>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Run integration tests -->
+		<profile>
+			<id>run-its</id>
+			<activation>
+				<property>
+					<name>skipTests</name>
+					<value>!true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-invoker-plugin</artifactId>
+						<version>1.3</version>
+						<configuration>
+							<debug>true</debug>
+							<projectsDirectory>src/it</projectsDirectory>
+							<pomIncludes>
+								<pomInclude>unpack-sdk/pom.xml</pomInclude>
+							</pomIncludes>
+							<postBuildHookScript>verify</postBuildHookScript>
+							<localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
+							<goals>
+								<goal>clean</goal>
+								<goal>integration-test</goal>
+							</goals>
+							<settingsFile>src/it/settings.xml</settingsFile>
+							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>install</goal>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	
+        
 
 </project>

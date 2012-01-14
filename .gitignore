@@ -2,3 +2,4 @@ src/main/resources/qooxdoo-sdk
 *.asc
 target
 DEPLOYMENT_STEPS.txt
+.project

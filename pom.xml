@@ -69,10 +69,6 @@
 		<url>https://github.com/qooxdoo/qooxdoo</url>
 	</scm>
 
-	<properties>
-		<env.SDKVERSION>${project.version}</env.SDKVERSION>
-	</properties>
-
 	<profiles>
 		<!-- Download the sdk from the scm -->
 		<profile>

@@ -24,6 +24,11 @@ folder as
 subdirectory.
 
 
+## Prerequisites
+
+You have to make sure to adapt the 'pom.xml' to the current version of the SDK and the current version of the parent pom. The parent pom file has to be released **before** building the SDK package.
+
+
 ## Usage
 
 Run the command

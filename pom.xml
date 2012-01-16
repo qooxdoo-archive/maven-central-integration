@@ -80,42 +80,40 @@
 			</activation>
 			<build>
 				<plugins>
-					<!-- Compute the git tag name from the project version number -->
+					<!-- Download the sdk from sourceforge -->
 					<plugin>
-						<groupId>org.codehaus.groovy.maven</groupId>
-						<artifactId>gmaven-plugin</artifactId>
-						<version>1.0</version>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<version>1.0-beta-3</version>
 						<executions>
 							<execution>
-								<id>qx.compute.tagname</id>
-								<phase>initialize</phase>
+								<id>download-sdk-release</id>
+								<phase>generate-resources</phase>
 								<goals>
-									<goal>execute</goal>
+									<goal>download-single</goal>
 								</goals>
 								<configuration>
-									<properties>
-										<qooxdoo.sdk.version>${project.version}</qooxdoo.sdk.version>
-									</properties>
-									<source>
-										project.properties['qooxdoo.sdk.tagname'] =
-										"release_"+((project.properties['qooxdoo.sdk.version'] =~
-										/\./).replaceAll('_'));
-            				</source>
+									<url>http://downloads.sourceforge.net/qooxdoo</url>
+									<fromFile>qooxdoo-${project.version}-sdk.zip</fromFile>
+									<toDir>${project.build.directory}/downloads</toDir>
 								</configuration>
 							</execution>
 						</executions>
 					</plugin>
 
+					<!-- Unpack the downloaded sdk -->
 					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.2</version>
 						<executions>
 							<execution>
-								<id>echo-info</id>
-								<phase>initialize</phase>
+								<id>prepare</id>
+								<phase>process-resources</phase>
 								<configuration>
 									<tasks>
-										<echo>Release tag name: ${qooxdoo.sdk.tagname}</echo>
-										<echo>To force a new sdk download, run 'mvn clean'</echo>
+										<unzip src="${project.build.directory}/downloads/qooxdoo-${project.version}-sdk.zip" dest="target/classes" />
+										<move file="target/classes/qooxdoo-${project.version}-sdk" tofile="target/classes/qooxdoo-sdk" />
 									</tasks>
 								</configuration>
 								<goals>
@@ -124,30 +122,6 @@
 							</execution>
 						</executions>
 					</plugin>
-
-					<!-- Checkout the qooxdoo-sdk from scm -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-scm-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<id>get-qooxdoo-sdk</id>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>checkout</goal>
-								</goals>
-								<configuration>
-									<scmVersion>${qooxdoo.sdk.tagname}</scmVersion>
-									<scmVersionType>tag</scmVersionType>
-									<checkoutDirectory>target/classes/qooxdoo-sdk</checkoutDirectory>
-									<skipCheckoutIfExists>false</skipCheckoutIfExists>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-
 				</plugins>
 			</build>
 		</profile>
@@ -196,7 +170,7 @@
 			</build>
 		</profile>
 	</profiles>
-	
-        
+
+
 
 </project>

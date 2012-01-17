@@ -12,17 +12,6 @@ released SDK versions.
 Make sure you have at least the [Maven](http://maven.apache.org) version 2.2.1 
 installed.
 
-Download the qooxdoo SDK you'd like to publish at Maven Central and put it in
-the 
-
-    src/main/resources
-
-folder as 
-
-    qooxdoo-sdk
-
-subdirectory.
-
 
 ## Prerequisites
 
@@ -35,4 +24,4 @@ Run the command
 
     $ mvn package
 
-and to create the JAR file for the qooxdoo SDK.
+to download the corresponding SDK (depends on the POM version) and to create the JAR file for the qooxdoo SDK.
